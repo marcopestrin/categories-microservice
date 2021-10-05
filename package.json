@@ -1,0 +1,29 @@
+{
+  "name": "categories-microservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcopestrin/categories-microservice.git"
+  },
+  "author": "Marco Pestrin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcopestrin/categories-microservice/issues"
+  },
+  "homepage": "https://github.com/marcopestrin/categories-microservice#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "eslint": "^7.32.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.9",
+    "nodemon": "^2.0.13",
+    "path": "^0.12.7"
+  }
+}
