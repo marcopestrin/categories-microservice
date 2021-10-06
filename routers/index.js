@@ -19,21 +19,21 @@ import {
 } from "../controller/postController.js";
 
 export default function initializeSwagger(router) {
-    router.get("/getProducts", getProducts);
+    router.get("/getProducts", getProducts); //ok
     router.get("/getPosts", getPosts);
-    router.get("/getCategories", getCategories);
+    router.get("/getCategories", getCategories); //ok
 
-    router.get("/getProductById", getProductById);
-    router.get("/getPostById", getPostById);
-    router.get("/getCategoryById", getCategoryById);
+    router.get("/getProductById/:id", getProductById); //ok
+    router.get("/getPostById/:id", getPostById);
+    router.get("/getCategoryById/:id", getCategoryById); //ok
 
     router.put("/addPost", addPost);
-    router.put("/addCategory", addCategory);
+    router.put("/addCategory", addCategory); //ok
     router.put("/addProduct", addProduct);
 
-    router.post("/editPost", editPost);
-    router.post("/editProduct", editProduct);
+    router.post("/editPost/:id", editPost);
+    router.post("/editProduct/:id", editProduct); //ok
 
     router.delete("/deletePost", deletePost);
-    router.delete("/deleteProduct", deleteProduct);
+    router.delete("/deleteProduct/:id", deleteProduct); //ok
 }
