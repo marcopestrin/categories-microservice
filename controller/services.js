@@ -11,7 +11,6 @@ export const readItem = async(id, schema) => {
 
 export const updateItem = async(payload, schema) => {
     const query = { id: payload.id };
-    console.log("query", query);
     return await schema.findOneAndUpdate(query, {
         $set: { ...payload }
     })
@@ -30,11 +29,16 @@ export const existCategory = async(category) => {
     return await categorySchema.updateOne({ name: category });
 }
 
-export const addCountProduct = async(category) => {
+export const changeCountProduct = async(category, increment) => {
     const query = { name: category };
-    const update = { $inc: { "productCount": 1} };
-    return await categorySchema.findOneAndUpdate(query, update);
+    const update = {
+        $inc:{
+            "productCount": increment ? 1 : -1
+        }
+    };
+    return await categorySchema.update(query, update);
 }
+
 
 export const addCountPost = async(category) => {
 
