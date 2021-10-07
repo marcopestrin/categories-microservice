@@ -11,8 +11,13 @@ import {
 } from "./services.js";
 
 export const getProducts = async(req, res) => {
-    const result = await getAllItems(schema);
-    res.status(200).json(result);
+    try {
+        const result = await getAllItems(schema);
+        res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
 }
 
 export const getProductById = async(req, res) => {
@@ -21,7 +26,7 @@ export const getProductById = async(req, res) => {
         const result = await readItem(id, schema);
         res.status(200).json(result);
     } catch (error) {
-        console.log({ error })
+        console.log(error)
         return res.status(500).json({ error })
     }
 }
@@ -62,7 +67,7 @@ export const addProduct = async(req, res) => {
         
         throw "Category doesn't exist";
     } catch (error) {
-        console.log({ error })
+        console.log(error)
         return res.status(500).json({ error })
     }
 
@@ -78,7 +83,7 @@ export const deleteProduct = async(req, res) => {
         }
         throw "Impossible to delete this product";
     } catch(error) {
-        console.log({ error });
+        console.log(error);
         return res.status(500).json({ error });
     }
 }

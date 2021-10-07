@@ -5,29 +5,44 @@ import { getCountByCategory } from "../helpers/index.js"
 import { createItem, readItem, getAllItems, deleteItem } from "./services.js";
 
 export const getCategories = async(req, res)  => {
-    const categories = await getAllItems(schema);
-    const payload = await Promise.all(categories.map(async(category) => {
-        const { name, id } = category;
-        const productCount = await getCountByCategory(name);
-        return { name, id, productCount }
-    }))
-    res.status(200).json(payload);
+    try {
+        const categories = await getAllItems(schema);
+        const payload = await Promise.all(categories.map(async(category) => {
+            const { name, id } = category;
+            const productCount = await getCountByCategory(name);
+            return { name, id, productCount }
+        }))
+        res.status(200).json(payload);
+    } catch (error) { 
+        console.log(error);
+        res.status(500).json({ error });
+    }
 }
 
 export const getCategoryById = async(req, res)  => {
-    const { id } = req.params;
-    const result = await readItem(id, schema);
-    res.status(200).json(result);
+    try {
+        const { id } = req.params;
+        const result = await readItem(id, schema);
+        res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
 }
 
 export const addCategory = async(req, res) => {
-    const { name } = req.body;
-    const id = crypto.createHash("md5")
-        .update(name)
-        .digest("hex");
-    const payload = { id, name };
-    const result = await createItem(payload, schema);
-    res.status(200).json(result);
+    try {
+        const { name } = req.body;
+        const id = crypto.createHash("md5")
+            .update(name)
+            .digest("hex");
+        const payload = { id, name };
+        const result = await createItem(payload, schema);
+        res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+    }
 }
 
 export const deleteCategory = async(req, res) => {
@@ -45,7 +60,7 @@ export const deleteCategory = async(req, res) => {
         throw "Catergory is not empty. Impossible to delete";
     } catch (error) {
         console.log(error)
-        return res.status(500).json(error);
+        return res.status(500).json({ error });
     }
  
 }
