@@ -1,7 +1,8 @@
 import {
     getCategories,
     getCategoryById,
-    addCategory
+    addCategory,
+    deleteCategory
 } from "../controller/categoryController.js";
 import {
     getProducts,
@@ -34,6 +35,7 @@ export default function initializeSwagger(router) {
     router.post("/editPost/:id", editPost);
     router.post("/editProduct/:id", editProduct); //ok
 
-    router.delete("/deletePost", deletePost);
+    router.delete("/deleteCategory/:id", deleteCategory);
+    router.delete("/deletePost/:id", deletePost);
     router.delete("/deleteProduct/:id", deleteProduct); //ok
 }
