@@ -26,7 +26,7 @@ export const getAllItems = async(schema) => {
 
 // HELPERS
 export const existCategory = async(category) => {
-    return await categorySchema.updateOne({ name: category });
+    return await categorySchema.findOne({ name: category });
 }
 
 export const changeCountProduct = async(category, increment) => {

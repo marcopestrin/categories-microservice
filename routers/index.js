@@ -29,7 +29,7 @@ export default function initializeSwagger(router) {
 
     router.put("/addPost", addPost);
     router.put("/addCategory", addCategory); //ok
-    router.put("/addProduct", addProduct);
+    router.put("/addProduct", addProduct); //ok
 
     router.post("/editPost/:id", editPost);
     router.post("/editProduct/:id", editProduct); //ok

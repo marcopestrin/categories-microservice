@@ -31,9 +31,12 @@ export const editProduct = async(req, res) => {
         const { id } = req.params;
         if (id) {
             const { name, price, category } = req.body;
-            const payload = { name, price, category, id };
-            const result = await updateItem(payload, schema);
-            return res.status(200).json(result);
+            if (await existCategory(category)) {
+                const payload = { name, price, category, id };
+                const result = await updateItem(payload, schema);
+                return res.status(200).json(result);    
+            }
+            throw "Category doesn't exist";
         }
     
     } catch (error) {
@@ -48,7 +51,6 @@ export const addProduct = async(req, res) => {
         const id = crypto.createHash("md5")
             .update(name.concat(new Date().getTime()))
             .digest("hex");
-
         if (await existCategory(category)) {
             const payload = { id, name, price, category };
             const result = await createItem(payload, schema);
