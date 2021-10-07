@@ -1,11 +1,17 @@
 import schema from "../models/category.js";
 import crypto from "crypto";
+import { getCountByCategory } from "../helpers/index.js"
 
-import { createItem, readItem, updateItem, deleteItem, getAllItems } from "./services.js";
+import { createItem, readItem, getAllItems } from "./services.js";
 
 export const getCategories = async(req, res)  => {
-    const result = await getAllItems(schema);
-    res.status(200).json(result);
+    const categories = await getAllItems(schema);
+    const payload = await Promise.all(categories.map(async(category) => {
+        const { name, id } = category;
+        const productCount = await getCountByCategory(name);
+        return { name, id, productCount }
+    }))
+    res.status(200).json(payload);
 }
 
 export const getCategoryById = async(req, res)  => {

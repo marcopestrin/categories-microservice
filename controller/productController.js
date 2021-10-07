@@ -7,14 +7,14 @@ import {
     updateItem,
     deleteItem,
     getAllItems,
-    existCategory,
-    changeCountProduct
+    existCategory
 } from "./services.js";
 
 export const getProducts = async(req, res) => {
     const result = await getAllItems(schema);
     res.status(200).json(result);
 }
+
 export const getProductById = async(req, res) => {
     try {
         const { id } = req.params;
@@ -55,7 +55,6 @@ export const addProduct = async(req, res) => {
             const payload = { id, name, price, category };
             const result = await createItem(payload, schema);
             if (result) {
-                await changeCountProduct(category, true);
                 return res.status(200).json(result);
             }
             throw "Impossibile create a new product";
@@ -73,13 +72,9 @@ export const addProduct = async(req, res) => {
 export const deleteProduct = async(req, res) => {
     try {
         const { id } = req.params;
-        const item = await readItem(id, schema);
         const result = await deleteItem(id, schema);
         if (result) {
-            const { modifiedCount } = await changeCountProduct(item.category, false);
-            if (modifiedCount) {
-                return res.status(200).json(result);
-            }
+            return res.status(200).json(result);
         }
         throw "Impossible to delete this product";
     } catch(error) {

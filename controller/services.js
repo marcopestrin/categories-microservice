@@ -28,18 +28,3 @@ export const getAllItems = async(schema) => {
 export const existCategory = async(category) => {
     return await categorySchema.findOne({ name: category });
 }
-
-export const changeCountProduct = async(category, increment) => {
-    const query = { name: category };
-    const update = {
-        $inc:{
-            "productCount": increment ? 1 : -1
-        }
-    };
-    return await categorySchema.update(query, update);
-}
-
-
-export const addCountPost = async(category) => {
-
-}
