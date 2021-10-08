@@ -56,6 +56,9 @@ export const deleteCategory = async(req, res) => {
             if (result) {
                 return res.status(200).json(result);
             }
+            return res.status(500).json({
+                success: false
+            });
         }
         throw "Catergory is not empty. Impossible to delete";
     } catch (error) {
