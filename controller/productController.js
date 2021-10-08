@@ -27,9 +27,7 @@ export const getProductById = async(req, res) => {
         if (result) {
             return res.status(200).json(result);
         }
-        return res.status(200).json({
-            success: false
-        });
+        throw "Product doesn't exist";
     } catch (error) {
         console.log(error)
         return res.status(500).json({ error })
@@ -44,7 +42,10 @@ export const editProduct = async(req, res) => {
             if (await existCategory(category)) {
                 const payload = { name, price, category, id };
                 const result = await updateItem(payload, schema);
-                return res.status(200).json(payload);    
+                if (result) {
+                    return res.status(200).json(payload);    
+                }
+                throw "Impossibile to update this product";
             }
             throw "Category doesn't exist";
         }
@@ -75,8 +76,6 @@ export const addProduct = async(req, res) => {
         console.log(error)
         return res.status(500).json({ error })
     }
-
-
 }
 
 export const deleteProduct = async(req, res) => {

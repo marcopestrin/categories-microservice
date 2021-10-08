@@ -189,8 +189,8 @@ describe('Product', () => {
             chai.request(server)
                 .get(`/getProductById/${idProduct}`)
                 .end((err, res) => {
-                    res.should.have.status(200);
-                    expect(res.body).to.have.property('success', false);
+                    res.should.have.status(500);
+                    expect(res.body).to.have.property('error');
                     done();
                 })
         })
