@@ -52,6 +52,18 @@ describe('Category', () => {
                     done();
                 })
         })
+
+        it("Cannot add two categories with the same name", (done) => {
+            payload = { name: categoryName2 };
+            chai.request(server)
+                .put(`/addCategory`)
+                .send(payload)
+                .end((err, res) => {
+                    res.should.have.status(500);
+                    expect(res.body).to.have.property('error');
+                    done();
+                })
+        })
     })
     describe('Check category', () => {
         it("Category found", (done) => {
@@ -91,7 +103,7 @@ describe('Category', () => {
 
 describe('Product', () => {
     describe('Add a new product', () => {
-        it("Category created", (done) => {
+        it("Product created", (done) => {
             payload = {
                 name: 'taccuino',
                 price: 13,

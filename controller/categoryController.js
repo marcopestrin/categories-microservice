@@ -1,5 +1,6 @@
 import schema from "../models/category.js";
 import crypto from "crypto";
+import { showErrorInCli } from "../config.js";
 import {
     getProductCountByCategory,
     getPostCountByCategory
@@ -24,7 +25,9 @@ export const getCategories = async(req, res)  => {
         }))
         res.status(200).json(payload);
     } catch (error) { 
-        console.log(error);
+        if (showErrorInCli) {
+            console.log(error);
+        }
         res.status(500).json({ error });
     }
 }
@@ -41,7 +44,9 @@ export const getCategoryById = async(req, res)  => {
 
         }
     } catch (error) {
-        console.log(error);
+        if (showErrorInCli) {
+            console.log(error);
+        }        
         res.status(500).json({ error });
     }
 }
@@ -59,7 +64,9 @@ export const addCategory = async(req, res) => {
         }
         throw "Already existing category";
     } catch (error) {
-        console.log(error);
+        if (showErrorInCli) {
+            console.log(error);
+        }        
         res.status(500).json({ error });
     }
 }
@@ -81,7 +88,9 @@ export const deleteCategory = async(req, res) => {
         }
         throw "Catergory is not empty. Impossible to delete";
     } catch (error) {
-        console.log(error)
+        if (showErrorInCli) {
+            console.log(error);
+        }
         return res.status(500).json({ error });
     }
  

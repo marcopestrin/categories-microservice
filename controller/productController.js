@@ -1,6 +1,6 @@
 import schema from "../models/product.js";
 import crypto from "crypto";
-
+import { showErrorInCli } from "../config.js";
 import {
     createItem,
     readItem,
@@ -15,7 +15,9 @@ export const getProducts = async(req, res) => {
         const result = await getAllItems(schema);
         res.status(200).json(result);
     } catch (error) {
-        console.log(error);
+        if (showErrorInCli) {
+            console.log(error);
+        }
         res.status(500).json({ error });
     }
 }
@@ -29,7 +31,9 @@ export const getProductById = async(req, res) => {
         }
         throw "Product doesn't exist";
     } catch (error) {
-        console.log(error)
+        if (showErrorInCli) {
+            console.log(error);
+        }
         return res.status(500).json({ error })
     }
 }
@@ -51,7 +55,9 @@ export const editProduct = async(req, res) => {
         }
     
     } catch (error) {
-        console.log(error);
+        if (showErrorInCli) {
+            console.log(error);
+        }
         return res.status(500).json({ error });
     }
 }
@@ -73,7 +79,9 @@ export const addProduct = async(req, res) => {
         
         throw "Category doesn't exist";
     } catch (error) {
-        console.log(error)
+        if (showErrorInCli) {
+            console.log(error);
+        }
         return res.status(500).json({ error })
     }
 }
@@ -87,7 +95,9 @@ export const deleteProduct = async(req, res) => {
         }
         throw "Impossible to delete this product";
     } catch(error) {
-        console.log(error);
+        if (showErrorInCli) {
+            console.log(error);
+        }
         return res.status(500).json({ error });
     }
 }
