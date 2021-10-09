@@ -1,6 +1,14 @@
 import schema from "../models/post.js";
+import crypto from "crypto";
 
-import { createItem, readItem, updateItem, deleteItem, getAllItems } from "./services.js";
+import {
+    createItem,
+    readItem,
+    updateItem,
+    deleteItem,
+    getAllItems,
+    existCategory
+} from "./services.js";
 
 export const getPosts = async(req, res)  => {
     try {
@@ -30,7 +38,7 @@ export const editPost = async(req, res)  => {
         if (id) {
             const { title, body, category } = req.body;
             if (await existCategory(category)) {
-                const payload = { name, price, category, id };
+                const payload = { title, body, category, id };
                 const result = await updateItem(payload, schema);
                 if (result) {
                     return res.status(200).json(payload);    

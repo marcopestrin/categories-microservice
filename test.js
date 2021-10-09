@@ -75,10 +75,12 @@ describe('Category', () => {
                     res.body.should.be.a('array').to.have.deep.members([{
                         name: categoryName1,
                         productCount: 0,
+                        postCount: 0,
                         id: idCategory1
                     },{
                         name: categoryName2,
                         productCount: 0,
+                        postCount: 0,
                         id: idCategory2
                     }])
                     done();

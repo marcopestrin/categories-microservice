@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import Category from "./category.js";
 
 const PostSchema = new mongoose.Schema({
     title: { type: String, required: true },
