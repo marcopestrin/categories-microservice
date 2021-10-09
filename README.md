@@ -6,7 +6,7 @@
 - Express
 - Chai
 ## Getting Start
-- npm install
-
-## Testing
-- npm test
+- Install dependences as `npm install`
+- Set up MongoDB as `mongo`
+- In another CLI start the application as `npm start`
+- Possibly to use the automatic tests use `npm test`
